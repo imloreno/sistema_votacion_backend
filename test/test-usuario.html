@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Test</title>
+</head>
+<body style="margin: 0; padding: 0;">
+
+
+
+	<div style="width:100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+		<button onclick="validation()">Iniciar sesion</button>
+		<br>
+		<button onclick="insertUser()">Guardar Datos</button>
+		<br>
+		<button onclick="updateUser()">Editar Datos</button>
+		<br>
+		<button onclick="unableUser()">Deshabilitar</button>
+	</div>
+
+
+
+	
+	<script>
+		//------------------------------Validar
+		const validation = async () => {
+
+			const data = new FormData();
+			data.append('usuario_acceso','user2');
+			data.append('clave_acceso','123123');
+			const fetch_data = {
+				method: "POST",
+				body: data
+			}
+
+			try{
+				const request = await fetch('http://localhost/projects/sistema_votacion/?show=usuario&target=validar_usuario', fetch_data);
+				const response = await request.json();
+				console.log(response);
+			}catch(e){
+				console.error(`Error:  ${e}`);
+			}
+
+		}
+
+
+		//--------------------------------Guardar Datos
+
+		const insertUser = async () => {
+
+			const data = new FormData();
+			data.append('nombre_usuario', 'Lorenzo');
+			data.append('apellido_usuario', 'Arias');
+			data.append('ci_usuario', 8952345);
+			data.append('ci_dpto_usuario', 'sc');
+			data.append('telefono_usuario', 78095452);
+			data.append('email_usuario', 'lorenzito@gmail.com');
+			data.append('tipo_usuario', 'administrador');
+			data.append('usuario_acceso', 'usuario123');
+			data.append('clave_acceso', 'contraseña123');
+			const fetch_data = {
+				method: "POST",
+				body: data
+			}
+
+			try{
+
+				const request = await fetch('http://localhost/projects/sistema_votacion/?show=usuario&target=insertar_usuario', fetch_data);
+				const response = await request.text();
+				response ? console.log("ok"): console.log("no");
+
+			}catch(e){
+				console.error(`Error: ${e}`);
+			}
+
+		}
+
+
+		//--------------------------------Modificar Datos
+
+		const updateUser = async () => {
+
+			const data = new FormData();
+			data.append('id_usuario', 11);
+			data.append('nombre_usuario', 'Santiago');
+			data.append('apellido_usuario', 'Villegas');
+			data.append('ci_usuario', 9999999);
+			data.append('ci_dpto_usuario', 'cb');
+			data.append('telefono_usuario', 2433353);
+			data.append('email_usuario', 'santyy@gmail.com');
+			data.append('tipo_usuario', 'operador');
+			data.append('usuario_acceso', 'user321');
+			data.append('clave_acceso', 'clave321');
+			const fetch_data = {
+				method: "POST",
+				body: data
+			}
+
+			try{
+
+				const request = await fetch('http://localhost/projects/sistema_votacion/?show=usuario&target=modificar_usuario', fetch_data);
+				const response = await request.text();
+				response ? console.log("ok"): console.log("no");
+
+			}catch(e){
+				console.error(`Error: ${e}`);
+			}
+
+		}
+
+
+		//--------------------------------Deshabilitar usuario
+
+		const unableUser = async () => {
+
+			const data = new FormData();
+			data.append('id_usuario', 16);
+
+			const fetch_data = {
+				method: "POST",
+				body: data
+			}
+
+			try{
+
+				const request = await fetch('http://localhost/projects/sistema_votacion/?show=usuario&target=eliminar_usuario', fetch_data);
+
+				const response = await request.text();
+				console.log(response);
+				response ? console.log("ok"): console.log("no");
+
+			}catch(e){
+				console.log(`Error: ${e}`);
+			}
+
+		}
+
+
+	</script>
+</body>
+</html>
