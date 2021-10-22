@@ -1,5 +1,7 @@
 <?php 
 
+date_default_timezone_set('America/La_Paz');
+
 /*
 Comprueba las variables GET
 show = Request: usuario - votante - candidato - evento
@@ -16,15 +18,27 @@ if(
 	switch ( $_GET['show'] ) {
 
 		case "usuario":
-			include "controller/usuario.php";
+			include_once "controller/admin/usuario.php";
 			break;
 		
 		case "candidato":
-			include "controller/candidato.php";
+			include_once "controller/admin/candidato.php";
 			break;
 
 		case "evento":
-			include "controller/evento.php";
+			include_once "controller/admin/evento.php";
+			break;
+
+		case "categoria":
+			include_once "controller/admin/categoria.php";
+			break;
+
+		case "candidato_categoria":
+			include_once "controller/admin/candidato_categoria.php";
+			break;
+
+		case "votante":
+			include_once "controller/client/votante.php";
 			break;
 
 		default:
